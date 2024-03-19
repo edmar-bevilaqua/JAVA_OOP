@@ -8,8 +8,10 @@ import br.com.springboot.model.Cliente;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.Query;
+import jakarta.transaction.Transactional;
 
 @Repository
+@Transactional
 public class ClienteDAO implements CRUD<Cliente, Long>{
 
 	@PersistenceContext
