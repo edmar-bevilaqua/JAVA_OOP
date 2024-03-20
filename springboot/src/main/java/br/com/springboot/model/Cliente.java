@@ -30,7 +30,7 @@ public class Cliente {
 	@Size(min = 3, max = 50)
 	private String nome;
 	
-	@Column(length = 11)
+	@Column(length = 15)
 	@NotBlank(message = "CPF Inválido")
 	private String cpf;
 	
@@ -44,14 +44,15 @@ public class Cliente {
 	@NotNull(message = "Selecione uma opção")
 	private Sexo sexo;
 	
-	@Column(length = 10)
+	@Column(length = 20)
 	private String telefone;
 	
-	@Column(length = 11)
-	@NotNull(message = "Informe um número de telefone")
+	@Column(length = 20)
+	@NotBlank(message = "Campo Obrigatório")
 	private String celular;
 	
 	@Column(length = 50)
+	@NotBlank(message = "Campo Obrigatório")
 	@Email
 	private String email;
 	

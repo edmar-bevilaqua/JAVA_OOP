@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.com.springboot.bo.ClienteBO;
 import br.com.springboot.model.Cliente;
@@ -28,16 +29,18 @@ public class ClienteController {
 	}
 	
 	@RequestMapping(value = "", method = RequestMethod.POST)
-	public String salva(@Valid @ModelAttribute Cliente cliente, BindingResult result) {
+	public String salva(@Valid @ModelAttribute Cliente cliente, BindingResult result, RedirectAttributes attr) {
 		if (result.hasErrors()) {
 			return "clientes/formulario";
 		}
 		
 		if (cliente.getId() == null) {
 			bo.insere(cliente);
+			attr.addFlashAttribute("feedback", "Cliente cadastrado com sucesso!");
 		}
 		else {
 			bo.atualiza(cliente);
+			attr.addFlashAttribute("feedback", "Cliente atualizado com sucesso!");
 		}
 		return "redirect:/clientes";
 	}
@@ -55,16 +58,18 @@ public class ClienteController {
 	}
 	
 	@RequestMapping(value = "/inativa/{id}", method = RequestMethod.GET)
-	public String inativa(@PathVariable("id") Long id, ModelMap model) {
+	public String inativa(@PathVariable("id") Long id, ModelMap model, RedirectAttributes attr) {
 		Cliente cliente = bo.pesquisaPeloID(id);
 		bo.inativa(cliente);
+		attr.addFlashAttribute("feedback", "Cliente inativado com sucesso!");
 		return "redirect:/clientes";
 	}
 	
 	@RequestMapping(value = "/ativa/{id}", method = RequestMethod.GET)
-	public String ativa(@PathVariable("id") Long id, ModelMap model) {
+	public String ativa(@PathVariable("id") Long id, ModelMap model, RedirectAttributes attr) {
 		Cliente cliente = bo.pesquisaPeloID(id);
 		bo.ativa(cliente);
+		attr.addFlashAttribute("feedback", "Cliente ativado com sucesso!");
 		return "redirect:/clientes";
 	}
 
