@@ -3,6 +3,7 @@ package br.com.springboot.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import br.com.springboot.bo.ClienteBO;
 import br.com.springboot.model.Cliente;
+import jakarta.validation.Valid;
 
 @Controller
 @RequestMapping("/clientes")
@@ -26,8 +28,17 @@ public class ClienteController {
 	}
 	
 	@RequestMapping(value = "", method = RequestMethod.POST)
-	public String salva(@ModelAttribute Cliente cliente) {
-		bo.insere(cliente);
+	public String salva(@Valid @ModelAttribute Cliente cliente, BindingResult result) {
+		if (result.hasErrors()) {
+			return "clientes/formulario";
+		}
+		
+		if (cliente.getId() == null) {
+			bo.insere(cliente);
+		}
+		else {
+			bo.atualiza(cliente);
+		}
 		return "redirect:/clientes";
 	}
 	
