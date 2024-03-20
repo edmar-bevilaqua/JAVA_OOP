@@ -3,7 +3,7 @@ package br.com.springboot.model;
 public enum Sexo {
 	MASCULINO("Masculino"),
 	FEMININO("Feminino"),
-	ELU("Non-binary");
+	OUTRO("Non-binary");
 	
 	private String descricao;
 	
