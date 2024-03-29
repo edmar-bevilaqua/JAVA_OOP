@@ -11,7 +11,7 @@
 	</style>
 </head>
 <body>
-	<div th:replace="fragments/menu :: menu"></div>
+	<div th:replace="~{fragments/menu :: menu}"></div>
 
 	<div class="container">
 		<div class="bg-light p-5 rounded">
@@ -46,7 +46,7 @@
 			            </td>
 			            <td>
 			            	<a class="btn btn-sm btn-secondary" th:if="${fornecedor.ativo == false}" th:href="@{/fornecedores/ativa/{id}(id=${fornecedor.id})}">Ativar</a>
-			            	<a class="btn btn-sm btn-secondary" th:unless="${cliente.ativo == false}" th:href="@{/fornecedores/inativa/{id}(id=${fornecedor.id})}">Inativar</a>
+			            	<a class="btn btn-sm btn-secondary" th:unless="${fornecedor.ativo == false}" th:href="@{/fornecedores/inativa/{id}(id=${fornecedor.id})}">Inativar</a>
 			            </td>
 			       </tr>
 			     </tbody>

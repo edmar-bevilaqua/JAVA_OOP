@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -29,8 +30,8 @@ public class FornecedorController {
 		return new ModelAndView("fornecedores/formulario", model);
 	}
 	
-	@PostMapping(value = "")
-	public String salva(@Valid @ModelAttribute Fornecedor fornecedor, BindingResult result, RedirectAttributes attr) {
+	@RequestMapping(value = "/salva", method = RequestMethod.POST)
+	public String salva(@Valid @ModelAttribute("fornecedor") Fornecedor fornecedor, BindingResult result, RedirectAttributes attr) {
 		if (result.hasErrors()) {
 			return "fornecedores/formulario";
 		}
@@ -45,7 +46,7 @@ public class FornecedorController {
 		return "redirect:/fornecedores";
 	}
 	
-	@GetMapping(value = "")
+	@GetMapping("")
 	public ModelAndView lista(ModelMap model) {
 		model.addAttribute("fornecedores", bo.lista());
 		return new ModelAndView("fornecedores/lista", model);
@@ -61,7 +62,7 @@ public class FornecedorController {
 	public String ativa(@PathVariable("id") Long id, ModelMap model, RedirectAttributes attr) {
 		Fornecedor fornecedor = bo.pesquisaPeloID(id);
 		bo.ativa(fornecedor);
-		attr.addAttribute("feedback", "Fornecedor ativado com sucesso!");
+		attr.addFlashAttribute("feedback", "Fornecedor ativado com sucesso!");
 		return "redirect:/fornecedores";
 	}
 	
@@ -69,7 +70,7 @@ public class FornecedorController {
 	public String inativa(@PathVariable("id") Long id, ModelMap model , RedirectAttributes attr) {
 		Fornecedor fornecedor = bo.pesquisaPeloID(id);
 		bo.inativa(fornecedor);
-		attr.addAttribute("feedback", "Fornecedor inativado com sucesso!");
+		attr.addFlashAttribute("feedback", "Fornecedor inativado com sucesso!");
 		return "redirect:/fornecedores";
 	}
 }

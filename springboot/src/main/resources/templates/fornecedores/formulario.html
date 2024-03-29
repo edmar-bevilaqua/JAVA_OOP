@@ -12,14 +12,14 @@
 	</style>
 </head>
 <body>
-	<div th:replace="fragments/menu :: menu"></div>
+	<div th:replace="~{fragments/menu :: menu}"></div>
 
 	<div class="container">
 		<div class="bg-light p-5 rounded">
 			<h1>Dados do Fornecedor</h1>
 			<hr>
 			<div>
-				<form th:action="@{/fornecedores}" th:object="${fornecedor}" method="POST">
+				<form th:action="@{/fornecedores/salva}" th:object="${fornecedor}" method="POST">
 					<input id="ativo" type="hidden" th:field="*{id}"/>
 					<div class="mb-3 form-check form-switch">
 						<label class="form-check-label" for="ativo">Registro ativo</label>

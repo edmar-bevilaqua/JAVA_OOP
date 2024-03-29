@@ -19,7 +19,6 @@ public class Fornecedor {
 	
 	@Column(nullable = false, length = 100)
 	@NotBlank(message = "Informe um nome fantasia!")
-	@Size(min = 1, max = 100)
 	private String nomeFantasia;
 	
 	@Column(nullable = false, length = 100)
@@ -29,18 +28,16 @@ public class Fornecedor {
 	
 	@Column(nullable = false, length = 18)
 	@NotBlank(message = "Informe um CNPJ")
-	@Size(min = 18, max = 18)
 	private String cnpj;
 	
-	@Column(length = 13)
+	@Column(length = 20)
 	private String telefone;
 	
-	@Column(nullable = false, length = 15)
+	@Column(nullable = false, length = 20)
 	@NotBlank(message = "Informe um Celular")
-	@Size(min = 15, max = 15)
 	private String celular;
 	
-	@Column(nullable = false, length = 15)
+	@Column(nullable = false, length = 100)
 	@NotBlank(message = "Informe um Email")
 	@Email
 	private String email;

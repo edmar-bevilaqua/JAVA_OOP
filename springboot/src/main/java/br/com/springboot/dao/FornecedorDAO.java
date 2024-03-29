@@ -17,7 +17,6 @@ public class FornecedorDAO implements CRUD<Fornecedor, Long>{
 	@PersistenceContext
 	private EntityManager entityManager;
 	
-	
 	@Override
 	public Fornecedor pesquisaPeloID(Long id) {
 		return entityManager.find(Fornecedor.class, id);
@@ -37,7 +36,6 @@ public class FornecedorDAO implements CRUD<Fornecedor, Long>{
 	@Override
 	public void atualiza(Fornecedor fornecedor) {
 		entityManager.merge(fornecedor);
-		
 	}
 
 	@Override
