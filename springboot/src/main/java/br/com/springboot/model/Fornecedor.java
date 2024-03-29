@@ -41,7 +41,7 @@ public class Fornecedor {
 	private String celular;
 	
 	@Column(nullable = false, length = 15)
-	@NotBlank(message = "Informe um Celular")
+	@NotBlank(message = "Informe um Email")
 	@Email
 	private String email;
 	

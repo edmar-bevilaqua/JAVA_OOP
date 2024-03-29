@@ -25,32 +25,24 @@
 						<label class="form-check-label" for="ativo">Registro ativo</label>
 						<input class="form-check-input" role="switch" id="ativo" type="checkbox" th:field="*{ativo}"/>
 					</div>
-					<div class="mb-6">
-						<label class="form-label" for="nomeFantasia">Nome Fantasia</label>
-						<input class="form-control" id="nomeFantasia" type="text" th:field="*{nomeFantasia}"/>
-						<span style="color: red" th:if="${#fields.hasErrors('nomeFantasia')}" th:errors="*{nomeFantasia}"></span>
+					<div class="row">
+						<div class="col-6 mb-3">
+							<label class="form-label" for="nomeFantasia">Nome Fantasia</label>
+							<input class="form-control" id="nomeFantasia" type="text" th:field="*{nomeFantasia}"/>
+							<span style="color: red" th:if="${#fields.hasErrors('nomeFantasia')}" th:errors="*{nomeFantasia}"></span>
+						</div>
+						<div class="col-6 mb-3">
+							<label class="form-label" for="razaoSocial">Razão Social</label>
+							<input class="form-control" id="razaoSocial" type="text" th:field="*{razaoSocial}"/>
+							<span style="color: red" th:if="${#fields.hasErrors('razaoSocial')}" th:errors="*{razaoSocial}"></span>
+						</div>
 					</div>
 					<div class="row">
-						<div class="col-4 mb-3">
-							<label class="form-label" for="cpf">CPF</label>
-							<input class="form-control" id="cpf" type="text" th:field="*{cpf}" />
-							<span style="color: red" th:if="${#fields.hasErrors('cpf')}" th:errors="*{cpf}"></span>
-						</div>
-						<div class="col-4 mb-3">
-							<label class="form-label" for="dataNascimento">Data de Nascimento</label>
-							<input class="form-control" id="dataNascimento" type="date" th:field="*{dataNascimento}" />
-							<span style="color: red" th:if="${#fields.hasErrors('dataNascimento')}" th:errors="*{dataNascimento}"></span>
-						</div>
-						<div class="col-4 mb-3">
-							<label class="form-label" for="sexo">Sexo</label>
-							<select class="form-select" id="sexo" th:field="*{sexo}">
-								<option value="">Selecione uma opção</option>
-								<option value="MASCULINO">Masculino</option>
-								<option value="FEMININO">Feminino</option>
-								<option value="OUTRO">Outro</option>
-							</select>
-							<span style="color: red" th:if="${#fields.hasErrors('sexo')}" th:errors="*{sexo}"></span>
-						</div>
+						<div class="mb-3">
+							<label class="form-label" for="cnpj">CNPJ</label>
+							<input class="form-control" id="cnpj" type="text" th:field="*{cnpj}" />
+							<span style="color: red" th:if="${#fields.hasErrors('cnpj')}" th:errors="*{cnpj}"></span>
+						</div>			
 					</div>
 					<div class="row">
 						<div class="col-3 mb-3">
@@ -81,7 +73,7 @@
 	
 	<script type="text/javascript">
 		$(document).ready(function() {
-			$('#cpf').mask('999.999.999-99');
+			$('#cnpj').mask('99.999.999/9999-99');
 			$('#telefone').mask('(99) 9999-9999');
 			$('#celular').mask('(99) 9 9999-9999');
 		});
