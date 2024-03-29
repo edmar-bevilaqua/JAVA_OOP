@@ -16,19 +16,19 @@
 
 	<div class="container">
 		<div class="bg-light p-5 rounded">
-			<h1>Dados do Cliente</h1>
+			<h1>Dados do Fornecedor</h1>
 			<hr>
 			<div>
-				<form th:action="@{/clientes}" th:object="${cliente}" method="POST">
+				<form th:action="@{/fornecedores}" th:object="${fornecedor}" method="POST">
 					<input id="ativo" type="hidden" th:field="*{id}"/>
 					<div class="mb-3 form-check form-switch">
 						<label class="form-check-label" for="ativo">Registro ativo</label>
 						<input class="form-check-input" role="switch" id="ativo" type="checkbox" th:field="*{ativo}"/>
 					</div>
 					<div class="mb-6">
-						<label class="form-label" for="nome">Nome</label>
-						<input class="form-control" id="nome" type="text" th:field="*{nome}"/>
-						<span style="color: red" th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></span>
+						<label class="form-label" for="nomeFantasia">Nome Fantasia</label>
+						<input class="form-control" id="nomeFantasia" type="text" th:field="*{nomeFantasia}"/>
+						<span style="color: red" th:if="${#fields.hasErrors('nomeFantasia')}" th:errors="*{nomeFantasia}"></span>
 					</div>
 					<div class="row">
 						<div class="col-4 mb-3">
