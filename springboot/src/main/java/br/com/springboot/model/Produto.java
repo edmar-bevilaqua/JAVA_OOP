@@ -16,7 +16,7 @@ import jakarta.validation.constraints.NotNull;
 public class Produto {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
+	private Long id;
 	
 	@Column(nullable = false, length = 50)
 	@NotBlank(message = "Informe um nome para o produto!")
@@ -32,7 +32,7 @@ public class Produto {
 		this.ativo = true;
 	}
 
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
