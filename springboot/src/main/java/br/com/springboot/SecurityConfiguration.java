@@ -40,7 +40,7 @@ public class SecurityConfiguration  {
 				.build();
 		UserDetails admin = User.builder()
 			.username("admin")
-			.password(passwordEncoder().encode("12345"))
+			.password(passwordEncoder().encode("admin"))
 			.roles("USUARIO", "ADMININISTRADOR")
 			.build();
 
