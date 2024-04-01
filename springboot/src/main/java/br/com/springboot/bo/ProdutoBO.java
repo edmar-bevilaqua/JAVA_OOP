@@ -44,4 +44,9 @@ public class ProdutoBO implements CRUD<Produto, Long>{
 		produto.setAtivo(false);
 		dao.atualiza(produto);
 	}
+	
+	public void ativa(Produto produto) {
+		produto.setAtivo(true);
+		dao.atualiza(produto);
+	}
 }
