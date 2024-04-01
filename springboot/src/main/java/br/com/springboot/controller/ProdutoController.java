@@ -1,5 +1,6 @@
 package br.com.springboot.controller;
 
+import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.com.springboot.bo.ProdutoBO;
+import br.com.springboot.model.Categoria;
 import br.com.springboot.model.Produto;
 import jakarta.validation.Valid;
 
@@ -29,16 +31,18 @@ public class ProdutoController {
 	@GetMapping(value = "/novo")
 	public ModelAndView novo(ModelMap model) {
 		model.addAttribute("produto", new Produto());
+		model.addAttribute("categorias", Arrays.asList(Categoria.values()));
 		return new ModelAndView("produtos/formulario", model);
 	}
 	
 	@PostMapping(value = "/salva")
-	public String salva(@Valid @ModelAttribute("produto") Produto produto, BindingResult result, RedirectAttributes attr) {
+	public String salva(@Valid @ModelAttribute("produto") Produto produto, BindingResult result, RedirectAttributes attr, ModelMap model) {
 		if (result.hasErrors()) {
 			List<FieldError> errors = result.getFieldErrors();
 		    for (FieldError error : errors ) {
 		        System.out.println (error.getObjectName() + " - " + error.getDefaultMessage());
 		    }
+		    model.addAttribute("categorias", Arrays.asList(Categoria.values()));
 			return "produtos/formulario";
 		}
 		if (produto.getId() == null) {

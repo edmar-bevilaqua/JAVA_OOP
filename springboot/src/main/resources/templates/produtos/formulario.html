@@ -34,10 +34,7 @@
 							<label class="form-label" for="categoria">Categoria</label>
 							<select class="form-select" id="categoria" th:field="*{categoria}">
 								<option value="">Selecione uma opção</option>
-								<option value="CELULARES">Celulares</option>
-								<option value="ELETRODOMESTICOS">Eletrodomésticos</option>
-								<option value="INFORMATICA">Informática</option>
-								<option value="MOVEIS">Móveis</option>
+								<option th:each="categoria : ${categorias}" th:value="${categoria}" th:text="${categoria.getDescricao()}"></option>
 							</select>
 							<span style="color: red" th:if="${#fields.hasErrors('categoria')}" th:errors="*{categoria}"></span>
 						</div>	
