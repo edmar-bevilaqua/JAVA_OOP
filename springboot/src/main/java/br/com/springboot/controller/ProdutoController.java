@@ -1,9 +1,12 @@
 package br.com.springboot.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -32,6 +35,10 @@ public class ProdutoController {
 	@PostMapping(value = "/salva")
 	public String salva(@Valid @ModelAttribute("produto") Produto produto, BindingResult result, RedirectAttributes attr) {
 		if (result.hasErrors()) {
+			List<FieldError> errors = result.getFieldErrors();
+		    for (FieldError error : errors ) {
+		        System.out.println (error.getObjectName() + " - " + error.getDefaultMessage());
+		    }
 			return "produtos/formulario";
 		}
 		if (produto.getId() == null) {
