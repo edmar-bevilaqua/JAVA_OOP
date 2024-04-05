@@ -21,54 +21,53 @@ import br.com.springboot.model.NotaEntrada;
 import jakarta.validation.Valid;
 
 @Controller
-@RequestMapping("/notas_entrada")
+@RequestMapping("/nota-entrada")
 public class NotaEntradaController {
 	
 	@Autowired
 	private NotaEntradaBO notaEntradaBO;
 	
+	@Autowired
 	private FornecedorBO fornecedorBO;
 	
 	@GetMapping(value = "/novo")
 	public ModelAndView novo(ModelMap model) {
-		Long fornecedorId = null;
 		model.addAttribute("notaEntrada", new NotaEntrada());
-		model.addAttribute("fornecedorId", fornecedorId);
 		model.addAttribute("fornecedores", fornecedorBO.lista());
-		return new ModelAndView("notas_entrada/formulario", model);
+		return new ModelAndView("nota-entrada/formulario", model);
 	}
-	
 	@PostMapping(value = "/salva")
-	public String salva(@Valid @ModelAttribute("notaEntrada") NotaEntrada notaEntrada, BindingResult result, RedirectAttributes attr) {
+	public String salva(@Valid @ModelAttribute("notaEntrada") NotaEntrada notaEntrada, BindingResult result, RedirectAttributes attr, ModelMap model) {
 		if (result.hasErrors()) {
 			List<FieldError> errors = result.getFieldErrors();
-		    for (FieldError error : errors ) {
+		    for (FieldError error : errors) {
 		        System.out.println (error.getObjectName() + " - " + error.getDefaultMessage());
 		    }
-			return "notas_entrada/formulario";
+		    model.addAttribute("fornecedores", fornecedorBO.lista());
+			return "nota-entrada/formulario";
 		}
 		if (notaEntrada.getId() == null) {
 			notaEntradaBO.insere(notaEntrada);
 			attr.addFlashAttribute("feedback", "Nota de Entrada cadastrada com sucesso!");
-			return "redirect:/notas_entrada";
+			return "redirect:/nota-entrada";
 		}
 		else {
 			notaEntradaBO.atualiza(notaEntrada);
 			attr.addFlashAttribute("feedback", "Nota de Entrada atualizada com sucesso!");
-			return "redirect:/notas_entrada";
+			return "redirect:/nota-entrada";
 		}
 	}
 	
 	@GetMapping(value = "")
 	public ModelAndView lista(ModelMap model) {
-		model.addAttribute("notas_entradas", notaEntradaBO.lista());
-		return new ModelAndView("notas_entradas", model);
+		model.addAttribute("nota-entrada", notaEntradaBO.lista());
+		return new ModelAndView("nota-entrada", model);
 	}
 	
 	@GetMapping(value = "/edita/{id}")
 	public ModelAndView edita(@PathVariable("id") Long id, ModelMap model) {
 		model.addAttribute("notaEntrada", notaEntradaBO.pesquisaPeloID(id));
-		return new ModelAndView("notas_entradas/formulario", model);
+		return new ModelAndView("nota-entrada/formulario", model);
 	}
-	
+
 }

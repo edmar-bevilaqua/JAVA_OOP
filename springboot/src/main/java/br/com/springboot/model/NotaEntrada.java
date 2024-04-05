@@ -14,6 +14,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.Transient;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "notas_entrada")
@@ -25,6 +26,7 @@ public class NotaEntrada {
 	
 	@DateTimeFormat(iso = ISO.DATE_TIME)
 	@Column(nullable = false, name="data_hora", columnDefinition = "DATETIME")
+	@NotNull(message = "Por favor, selecione uma data!")
 	private LocalDateTime dataHora;
 	
 	@Transient
